@@ -25,7 +25,7 @@ The package contains three general functions: *get_sentences*; *sent_ngrams*; *s
 
 -	*get_sentences* is a general function for extraction sentences from raw text. The main input is a string vector. The only other required argument is the language model (here, for simplicity, “english”). Additionally, if needed the output can be further cleaned off of numbers (add argument *remove_no = TRUE*) and punctuation (add argument *remove_punct = TRUE*), all characters can be transformed to lower cases (add argument *tolower = TRUE*), as well as the outcome sentence can be accompanied by its lemmatized version (add argument *lem = TRUE*; see example below). By default, all available cores are used (as returned by parallel::detectCores) but the number can be adjusted with an argument n.cores = *int*. The initiation of parallel processing takes time, so the provided examples do not reflect the actual processing speed needed for a more robust dataset.
 
-```
+~~~
 library(sentenceR)
 sample_text <- c("This is sentence number one. This is sentence number two. This is sentence number three.", "This is sentence number four. This is sentence number five. This is sentence number six.")
 get_sentences(text = sample_text, language = "english", lem = TRUE)
@@ -37,11 +37,11 @@ get_sentences(text = sample_text, language = "english", lem = TRUE)
 4      2            1           1  This is sentence number four.  this be sentence number four.
 5      2            1           2  This is sentence number five.  this be sentence number five.
 6      2            1           3   This is sentence number six.   this be sentence number six.
-```
+~~~
 
 -	*sent_ngrams* is a simple function that takes the result of *get_sentences* (a data frame) and creates higher sentence n-grams based on a specified *n*.
 
-```
+~~~
 library(sentenceR)
 sample_text <- c("This is sentence number one. This is sentence number two. This is sentence number three.", "This is sentence number four. This is sentence number five. This is sentence number six.")
 result <- get_sentences(text = sample_text, language = "english", lem = TRUE)
@@ -52,11 +52,11 @@ sent_ngrams(sentences = result, n = 2)
 2      1        2 This is sentence number two. This is sentence number three.
 3      2        1 This is sentence number four. This is sentence number five.
 4      2        2  This is sentence number five. This is sentence number six.
-```
+~~~
 
 -	*sent_ngrams_lem* is an equivalent to *sent_ngrams* but instead of regular sentences their lemmatized version are taken as an input (column sentence_lem must exist in the get_sentences data frame).
 
-```
+~~~
 library(sentenceR)
 sample_text <- c("This is sentence number one. This is sentence number two. This is sentence number three.", "This is sentence number four. This is sentence number five. This is sentence number six.")
 result <- get_sentences(text = sample_text, language = "english", lem = TRUE)
@@ -67,7 +67,7 @@ sent_ngrams_lem(sentences = result, n = 2)
 2      1        2 this be sentence number two. this be sentence number three.
 3      2        1 this be sentence number four. this be sentence number five.
 4      2        2  this be sentence number five. this be sentence number six.
-```
+~~~
 
 ## Final Remarks
 The package has been developed as a practice for me as I wanted to learn how to create packages to better organize my code. However, it might be useful for anybody working on NLP tasks requiring sentence tokenization and lemmatization in languages other than English. I know the approach is not the most efficient in terms of speed and accuracy but it is very versatile when it comes to languages that can be processed out of the box. Regarding accuracy, it is important to stress that sentence tokenization is based on accuracy of language models and may differ among models. Although I’ve never planned to submit it to CRAN, I am planning to maintain it as long as it is still useful via GitHub. Feel free to contact me if standard GitHub channels are not suitable for you via my [personal website](https://mochtak.com/). If used, please cite it as:
