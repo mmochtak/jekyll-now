@@ -5,10 +5,10 @@ title: 'SentenceR: (Almost) Language-Agnostic Sentence Tokenization Using R'
 ---
 
 <img src="/images/logo_sentencer.png" style="max-width:100%;" height="139" align="right">
-**sentenceR** is a language-agnostic utility designed for sentence tokenization of a raw text. Using the UDPipe POS tagging pipeline, the package automatically extracts sentences with their appropriate indexes (hence the “crowbar” logo as a reference to extraction). The package works with any of the 100+ language models natively provided by UDPipe package.
+**sentenceR** is a language-agnostic utility designed for sentence tokenization of raw text. Using the UDPipe POS tagging pipeline, the package automatically extracts sentences with their appropriate indexes (hence the “crowbar” logo as a reference to extraction). The package works with any of the 100+ language models natively provided by UDPipe package.
 
 ## Overview
-Working on languages other than English is for many programmers interested in NLP a real obstacle requiring investing a lot of precious time in developing language-specific pre-processing tools. This process of “reinventing wheel” is necessary especially when it comes to applications that need to be fast, efficient, and accurate. For many projects, however, this initial investment does not make sense, especially if it comes to testing and development. SentenceR is a package that focuses on streamlining at least part of this hassle when it comes to sentence tokenization and lemmatization. The motivation for putting together this package has come from my own experience while working on text processing of textual data from low-resourced languages. Although resources available for R users working on textual data have become very popular in the recent years, their primary focus still remains on English with other languages being far behind in terms of development and implementation.   
+Working on languages other than English is for many programmers interested in NLP a real obstacle requiring investing a lot of precious time in developing language-specific pre-processing tools. This process of “reinventing wheel” is necessary especially when it comes to applications that need to be fast, efficient, and accurate. For many projects, however, this initial investment of time and resources does not make sense, especially if it comes to testing and development. SentenceR is a package that focuses on streamlining at least part of this hassle when it comes to sentence tokenization and lemmatization. The motivation for putting together this package has come from my own experience while working on text processing of textual data from low-resourced languages. Although resources available for R users working on textual data have become very popular in the recent years, their primary focus still remains on English with other languages being far behind in terms of development and implementation.   
 
 The package is intended for use especially with non-English languages that are under-resourced in terms of standardized tools. The approach is not particularly fast as the pipeline relies on full POS tagging done by UDPipe package but it provides a reliable option for programmers working on small corpora of various origins (typically social scientists) who need a simple pre-processing tool for extracting sentence-level tokens and their higher n-grams. For the convenience, the main function provides several control arguments for cleaning the raw text as well as extracting its lemmatized form for further processing.
 
@@ -21,7 +21,7 @@ The package can be simply installed from GitHub using *devtools*. All missing de
 devtools::install_github('mmochtak/sentenceR')
 ~~~
 
-The package contains three general functions: *get_sentences*; *sent_ngrams*; *sent_ngrams_lem*. 
+The package contains three general functions: *get_sentences*; *sent_ngrams*; and *sent_ngrams_lem*. 
 
 **get_sentences** is a general function for extraction sentences from raw text. The main input is a string vector. The only other required argument is the language model (here, for simplicity and clarity for broader audience, “english”; full list of available models can be found in [UDPipe repository]( https://github.com/bnosac/udpipe)). Additionally, if needed the output can be further cleaned off of numbers (add argument remove_no = TRUE) and punctuation (add argument remove_punct = TRUE), all characters can be transformed to lower cases (add argument tolower = TRUE), as well as the outcome sentence can be accompanied by its lemmatized version (add argument lem = TRUE; see example below). By default, all available cores are used (as returned by parallel::detectCores) but the number can be adjusted with an argument n.cores = *int*. The initiation of parallel processing takes time, so the provided examples do not reflect the actual processing speed needed for a more robust dataset. It is slow but not “that” slow.
 
@@ -70,11 +70,11 @@ sent_ngrams_lem(sentences = result, n = 2)
 ~~~
 
 ## Application on low-resourced language: *Czech*
-Previous section has demonstrated the application of package on data that are understandable to anyone reading this blog (English sentences). However, the real focus is on low-resourced languages so below you can find the application on Czech using a dummy text from Czech Wikipedia. 
+Previous section has demonstrated the application of package on data that are understandable to anyone reading this blog (i.e. English sentences). However, the real focus of sentenceR package is on low-resourced languages. Below you can find the application on Czech using a dummy text from Czech Wikipedia. 
 
 ~~~
 library(sentenceR)
-Sys.setlocale(locale = "Czech_Czechia.1250") # Do not forget to set proper locale to avoid any problems with encoding (here is Czech_Czechia.1250 for Czech language )
+Sys.setlocale(locale = "Czech_Czechia.1250") # Do not forget to set proper locale to avoid any problems with encoding (here is Czech_Czechia.1250 for Czech language)
 sample_text <- enc2utf8("Česko, úředním názvem Česká republika, je stát ve střední Evropě. Samostatnost nabylo 1. ledna 1993 jako nástupnický stát Československa, předtím existovalo jako jedna ze dvou republik československé federace. Navazuje také na více než tisícileté dějiny české státnosti a kultury. Podle své ústavy je Česko parlamentní, demokratický právní stát s liberálním státním režimem a politickým systémem založeným na svobodné soutěži politických stran a hnutí. Hlavou státu je prezident republiky, vrcholným a jediným zákonodárným orgánem je dvoukomorový Parlament České republiky, na vrcholu moci výkonné stojí vláda České republiky.") # for testing purpose, the string with accented characters needs to have utf8 encoding (declaring strings in low-resourced languages like this returns encoding as “unknown”)
 get_sentences(text = sample_text, language = "czech", lem = TRUE)
 
