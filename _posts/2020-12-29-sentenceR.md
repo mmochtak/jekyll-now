@@ -76,24 +76,12 @@ Sys.setlocale(locale = "Czech_Czechia.1250") # Do not forget to set proper local
 sample_text <- enc2utf8("Česko, úředním názvem Česká republika, je stát ve střední Evropě. Samostatnost nabylo 1. ledna 1993 jako nástupnický stát Československa, předtím existovalo jako jedna ze dvou republik československé federace. Navazuje také na více než tisícileté dějiny české státnosti a kultury. Podle své ústavy je Česko parlamentní, demokratický právní stát s liberálním státním režimem a politickým systémem založeným na svobodné soutěži politických stran a hnutí. Hlavou státu je prezident republiky, vrcholným a jediným zákonodárným orgánem je dvoukomorový Parlament České republiky, na vrcholu moci výkonné stojí vláda České republiky.") # for testing purpose, the string with accented characters needs to have utf8 encoding (declaring strings in low-resourced languages like this returns encoding as “unknown”)
 get_sentences(text = sample_text, language = "czech", lem = TRUE)
 
-  doc_id paragraph_id sentence_id
-1      1            1           1
-2      1            1           2
-3      1            1           3
-4      1            1           4
-5      1            1           5
-                                                                                                                                                                       sentence
-1                                                                                                             Česko, úředním názvem Česká republika, je stát ve střední Evropě.
-2                               Samostatnost nabylo 1. ledna 1993 jako nástupnický stát Československa, předtím existovalo jako jedna ze dvou republik československé federace.
-3                                                                                                        Navazuje také na více než tisícileté dějiny české státnosti a kultury.
-4   Podle své ústavy je Česko parlamentní, demokratický právní stát s liberálním státním režimem a politickým systémem založeným na svobodné soutěži politických stran a hnutí.
-5 Hlavou státu je prezident republiky, vrcholným a jediným zákonodárným orgánem je dvoukomorový Parlament České republiky, na vrcholu moci výkonné stojí vláda České republiky.
-                                                                                                                                                          sentence_lem
-1                                                                                                      český, úřední název český republika, být stát v střední Evropa.
-2                         samostatnost nabýt 1. leden 1993 jako nástupnický stát Československo, předtím existovat jako jeden z dva republika československý federace.
-3                                                                                              navazovat také na hodně než tisíciletý dějiny český státnost a kultura.
-4   podle svůj ústav být Česko parlamentní, demokratický právní stát s liberální státní režim a politický systém založený na svobodný soutěž politický strana a hnutí.
-5 hlava stát být prezident republik, vrcholný a jediný zákonodárný orgán být dvoukomorový parlament český republika, na vrchol moc výkonný stát vláda český republika.
+  doc_id paragraph_id sentence_id sentence                           sentence_lem                        
+1 1                 1           1 Česko, úředním názvem Česká repub~ český, úřední název český republika~
+2 1                 1           2 Samostatnost nabylo 1. ledna 1993~ samostatnost nabýt 1. leden 1993 ja~
+3 1                 1           3 Navazuje také na více než tisícil~ navazovat také na hodně než tisícil~
+4 1                 1           4 Podle své ústavy je Česko parlame~ podle svůj ústav být Česko parlamen~
+5 1                 1           5 Hlavou státu je prezident republi~ hlava stát být prezident republik, ~
 
 result <- get_sentences(text = sample_text, language = "czech", lem = TRUE)
 sent_ngrams(sentences = result, n = 2)
