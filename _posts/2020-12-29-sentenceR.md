@@ -13,9 +13,9 @@ The package is intended for use especially with non-English languages that are u
 ## Installation Instruction
 Install the package from the GitHub repository:
 
-```
+~~~
 devtools::install_github('mmochtak/sentenceR')
-```
+~~~
 
 ## Current Version
 0.0.1
