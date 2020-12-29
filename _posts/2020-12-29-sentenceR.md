@@ -106,4 +106,4 @@ sent_ngrams_lem(sentences = result, n = 2)
 ## Final Remarks
 The package is still under development (current version is 0.0.1) so feel free to report any bugs or weird behavior. I already have couple of items on my “to do list” I am planning to implement in the upcoming months. Feel free to contact me if standard GitHub channels are not suitable for you via my [personal website](https://mochtak.com). If used in your research, please cite it as:
 
-> Mochtak, Michal (2021): sentenceR: Language-Agnostic Sentence Tokenization for Low-Resourced Languages. URL: https://github.com/mmochtak/sentenceR/
+> Mochtak, Michal (2021): sentenceR: R package for (almost) language-agnostic sentence tokenization. URL: https://github.com/mmochtak/sentenceR/
