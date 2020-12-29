@@ -1,7 +1,5 @@
 ---
 published: true
----
----
 layout: post
 title: "SentenceR: (Almost) Language-Agnostic Sentence Tokenization Using R"
 ---
