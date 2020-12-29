@@ -21,7 +21,9 @@ The package can be simply installed from GitHub using *devtools*. All missing de
 devtools::install_github('mmochtak/sentenceR')
 ~~~
 
-The package contains three general functions: *get_sentences*; *sent_ngrams*; *sent_ngrams_lem*. **get_sentences** is a general function for extraction sentences from raw text. The main input is a string vector. The only other required argument is the language model (here, for simplicity and clarity for broader audience, “english”). Additionally, if needed the output can be further cleaned off of numbers (add argument remove_no = TRUE) and punctuation (add argument remove_punct = TRUE), all characters can be transformed to lower cases (add argument tolower = TRUE), as well as the outcome sentence can be accompanied by its lemmatized version (add argument lem = TRUE; see example below). By default, all available cores are used (as returned by parallel::detectCores) but the number can be adjusted with an argument n.cores = *int*. The initiation of parallel processing takes time, so the provided examples do not reflect the actual processing speed needed for a more robust dataset. It is slow but not that slow.
+The package contains three general functions: *get_sentences*; *sent_ngrams*; *sent_ngrams_lem*. 
+
+**get_sentences** is a general function for extraction sentences from raw text. The main input is a string vector. The only other required argument is the language model (here, for simplicity and clarity for broader audience, “english”; full list of available models can be found on [UDPipe repo]( https://github.com/bnosac/udpipe). Additionally, if needed the output can be further cleaned off of numbers (add argument remove_no = TRUE) and punctuation (add argument remove_punct = TRUE), all characters can be transformed to lower cases (add argument tolower = TRUE), as well as the outcome sentence can be accompanied by its lemmatized version (add argument lem = TRUE; see example below). By default, all available cores are used (as returned by parallel::detectCores) but the number can be adjusted with an argument n.cores = *int*. The initiation of parallel processing takes time, so the provided examples do not reflect the actual processing speed needed for a more robust dataset. It is slow but not that slow.
 
 ~~~
 library(sentenceR)
@@ -52,7 +54,7 @@ sent_ngrams(sentences = result, n = 2)
 4      2        2  This is sentence number five. This is sentence number six.
 ~~~
 
-***sent_ngrams_lem*** is an equivalent to *sent_ngrams* but instead of regular sentences their lemmatized version are taken as an input (column sentence_lem must exist in the get_sentences data frame).
+**sent_ngrams_lem** is an equivalent to *sent_ngrams* but instead of regular sentences their lemmatized version are taken as an input (column sentence_lem must exist in the get_sentences data frame).
 
 ~~~
 library(sentenceR)
