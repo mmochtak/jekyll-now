@@ -3,8 +3,11 @@ published: true
 ---
 ---
 layout: post
-title: SentenceR: (Almost) Language-Agnostic Sentence Tokenization Using R
+title: "SentenceR: (Almost) Language-Agnostic Sentence Tokenization Using R"
 ---
+
+# SentenceR: (Almost) Language-Agnostic Sentence Tokenization Using R
+
 <img src="/images/logo_sentencer.png" style="max-width:100%;" height="139" align="right">
 **sentenceR** is a language-agnostic utility designed for sentence tokenization of a raw text. Using the UDPipe POS tagging pipeline, the package automatically extracts sentences with their appropriate indexes (hence the “crowbar” logo as a reference to extraction). The package works with any of the 100+ language models natively provided by UDPipe package (see https://github.com/bnosac/udpipe).
 
