@@ -122,9 +122,9 @@ img {
 
 // Specify the color of the selection
 ::-moz-selection {
-  text-shadow: $lightGray;
+  text-shadow: $gray;
   color: $black;
-  background: $lightGray;
+  background: $gray;
 }
 ::selection {
   text-shadow: $lightGray;
