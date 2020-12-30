@@ -124,10 +124,10 @@ img {
 ::-moz-selection {
   text-shadow: $gray;
   color: $black;
-  background: $gray;
+  background: $lightGgray;
 }
 ::selection {
-  text-shadow: $lightGray;
+  text-shadow: $gray;
   color: $black;
   background: $lightGray;
 }
