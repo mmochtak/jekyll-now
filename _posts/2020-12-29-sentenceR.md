@@ -70,7 +70,7 @@ sent_ngrams_lem(sentences = result, n = 2)
 ~~~
 
 ## Application on low-resourced language: *Czech*
-Previous section has demonstrated the application of package on data that are general enough for broad audience. However, the real focus of **sentence** package is on low-resourced languages. Below you can find the application on Czech using a dummy text from Czech Wikipedia.
+Previous section has demonstrated the application of package on data that are general enough for broad audience. However, the real focus of **sentenceR** package is on low-resourced languages. Below you can find the application on Czech using a dummy text from Czech Wikipedia.
 
 ~~~
 library(sentenceR)
@@ -107,56 +107,3 @@ sent_ngrams_lem(sentences = result, n = 2)
 The package is still under development (current version is 0.0.1) so feel free to report any bugs or weird behavior. Feel free to contact me if standard GitHub channels are not suitable for you via my [personal website](https://mochtak.com). If used in your research, please cite it as:
 
 > Mochtak, Michal (2021): sentenceR: Language-Agnostic Sentence Tokenization for Low-Resourced Languages. URL: https://github.com/mmochtak/sentenceR/
-
-
-~~~
-library(sentenceR)
-sample_text <- c("This is sentence number one. This is sentence number two. This is sentence number three.", "This is sentence number four. This is sentence number five. This is sentence number six.")
-result <- get_sentences(text = sample_text, language = "english", lem = TRUE)
-sent_ngrams_lem(sentences = result, n = 2)
-
-  doc_id ngram_id                                                       ngram
-1      1        1   this be sentence number one. this be sentence number two.
-2      1        2 this be sentence number two. this be sentence number three.
-3      2        1 this be sentence number four. this be sentence number five.
-4      2        2  this be sentence number five. this be sentence number six.
-~~~
-
-## Application on low-resourced language: *Czech*
-Previous section has demonstrated the application of package on data that are understandable to anyone reading this blog (i.e. English sentences). However, the real focus of sentenceR package is on low-resourced languages. Below you can find the application on Czech using a dummy text from Czech Wikipedia. 
-
-~~~
-library(sentenceR)
-Sys.setlocale(locale = "Czech_Czechia.1250") # Do not forget to set proper locale to avoid any problems with encoding (here is Czech_Czechia.1250 for Czech language)
-sample_text <- enc2utf8("Česko, úředním názvem Česká republika, je stát ve střední Evropě. Samostatnost nabylo 1. ledna 1993 jako nástupnický stát Československa, předtím existovalo jako jedna ze dvou republik československé federace. Navazuje také na více než tisícileté dějiny české státnosti a kultury. Podle své ústavy je Česko parlamentní, demokratický právní stát s liberálním státním režimem a politickým systémem založeným na svobodné soutěži politických stran a hnutí. Hlavou státu je prezident republiky, vrcholným a jediným zákonodárným orgánem je dvoukomorový Parlament České republiky, na vrcholu moci výkonné stojí vláda České republiky.") # for testing purpose, the string with accented characters needs to have utf8 encoding (declaring strings in low-resourced languages like this returns encoding as “unknown”)
-get_sentences(text = sample_text, language = "czech", lem = TRUE)
-
-  doc_id paragraph_id sentence_id sentence                           sentence_lem                        
-1 1                 1           1 Česko, úředním názvem Česká repub~ česko, úřední název český republika~
-2 1                 1           2 Samostatnost nabylo 1. ledna 1993~ samostatnost nabýt 1. leden 1993 ja~
-3 1                 1           3 Navazuje také na více než tisícil~ navazovat také na hodně než tisícil~
-4 1                 1           4 Podle své ústavy je Česko parlame~ podle svůj ústav být Česko parlamen~
-5 1                 1           5 Hlavou státu je prezident republi~ hlava stát být prezident republik, ~
-
-result <- get_sentences(text = sample_text, language = "czech", lem = TRUE)
-sent_ngrams(sentences = result, n = 2)
-
-  doc_id ngram_id ngram                                                                                  
-1 1      1        Česko, úředním názvem Česká republika, je stát ve střední Evropě. Samostatnost nabylo ~
-2 1      2        Samostatnost nabylo 1. ledna 1993 jako nástupnický stát Československa, předtím existo~
-3 1      3        Navazuje také na více než tisícileté dějiny české státnosti a kultury. Podle své ústav~
-4 1      4        Podle své ústavy je Česko parlamentní, demokratický právní stát s liberálním státním r~
-
-sent_ngrams_lem(sentences = result, n = 2)
-
-  doc_id ngram_id ngram                                                                                  
-1 1      1        česko, úřední název český republika, být stát v střední Evropa. samostatnost nabýt 1. ~
-2 1      2        samostatnost nabýt 1. leden 1993 jako nástupnický stát Československo, předtím existov~
-3 1      3        navazovat také na hodně než tisíciletý dějiny český státnost a kultura. podle svůj úst~
-4 1      4        podle svůj ústav být Česko parlamentní, demokratický právní stát s liberální státní re~
-~~~
-
-## Final Remarks
-The package is still under development (current version is 0.0.1) so feel free to report any bugs or weird behavior. I already have couple of items on my “to do list” I am planning to implement in the upcoming months. Feel free to contact me if standard GitHub channels are not suitable for you via my [personal website](https://mochtak.com). If used in your research, please cite it as:
-
-> Mochtak, Michal (2021): sentenceR: R package for (almost) language-agnostic sentence tokenization. URL: https://github.com/mmochtak/sentenceR/
