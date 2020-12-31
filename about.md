@@ -2,9 +2,10 @@
 layout: page
 title: About
 permalink: /about/
+published: true
 ---
 
-I am a Post-doctoral Research Associate at the Institute of Political Science, University of Luxembourg working on a project titled “ELWar – Electoral Legacies of War: Political Competition in Postwar Southeast Europe” funded by the ERC Starting Grant
+I am a Post-doctoral Research Associate at the Institute of Political Science, University of Luxembourg working on a project titled “ELWar – Electoral Legacies of War: Political Competition in Postwar Southeast Europe” funded by the ERC Starting Grant.
 
 ### More Information
 
