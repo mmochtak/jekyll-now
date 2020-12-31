@@ -23,7 +23,7 @@ devtools::install_github('mmochtak/sentenceR')
 
 The package contains three general functions: `get_sentences()`; `sent_ngrams()`;  and `sent_ngrams_lem()`. 
 
-`get_sentences()` is a general function for extraction sentences from raw text. The main input is a string vector. The only other required argument is the language model (here, for simplicity and clarity for broader audience, “english”; full list of available models can be found in [UDPipe repository]( https://github.com/bnosac/udpipe)). Additionally, if needed the output can be further cleaned off of numbers (add argument *remove_no = TRUE*) and punctuation (add argument *remove_punct = TRUE*), all characters can be transformed to lower cases (add argument *tolower = TRUE*), as well as the outcome sentence can be accompanied by its lemmatized version (add argument *lem = TRUE*; see example below). By default, all available cores are used for the processing.
+`get_sentences()` is a general function for extraction sentences from raw text. The main input is a string vector. The only other required argument is the language model (here, for simplicity and clarity for broader audience, “english”; full list of available models can be found in [UDPipe repository]( https://github.com/bnosac/udpipe)). Additionally, if needed the output can be further cleaned off of numbers (add argument *remove_no = TRUE*) and punctuation (add argument *remove_punct = TRUE*), all characters can be transformed to lower case (add argument *tolower = TRUE*), as well as the outcome sentence can be accompanied by its lemmatized version (add argument *lem = TRUE*; see example below). By default, all available cores are used for the processing.
 
 ~~~
 library(sentenceR)
@@ -54,7 +54,7 @@ sent_ngrams(sentences = result, n = 2)
 4      2        2  This is sentence number five. This is sentence number six.
 ~~~
 
-`sent_ngrams_lem()` is an equivalent to `sent_ngrams()` but instead of regular sentences their lemmatized version are taken as an input (column sentence_lem must exist in a data frame of class `sentenceR_df`).
+`sent_ngrams_lem()` is an equivalent to `sent_ngrams()` but instead of regular sentences their lemmatized version are taken as an input (column *sentence_lem* must exist in a data frame of class `sentenceR_df`).
 
 ~~~
 library(sentenceR)
@@ -70,12 +70,12 @@ sent_ngrams_lem(sentences = result, n = 2)
 ~~~
 
 ## Application on low-resourced language: *Czech*
-Previous section has demonstrated the application of package on data that are general enough for broad audience. However, the real focus of **sentenceR** package is on low-resourced languages. Below you can find the application on Czech using a dummy text from Czech Wikipedia.
+Previous section has demonstrated the application of package on data that are general enough for broad audience. However, the real focus of **sentenceR** package is on low-resourced languages. Below you can find the application on Czech using a dummy text from Czech Wikipedia. Unlike processing of textual data in English, it is very important to set up a proper encoding for handling the accented characters and any specific features of non-English localizations (see comments below).
 
 ~~~
 library(sentenceR)
 Sys.setlocale(locale = "Czech_Czechia.1250") # Do not forget to set proper locale to avoid any problems with encoding (here is Czech_Czechia.1250 for Czech language)
-sample_text <- enc2utf8("Česko, úředním názvem Česká republika, je stát ve střední Evropě. Samostatnost nabylo 1. ledna 1993 jako nástupnický stát Československa, předtím existovalo jako jedna ze dvou republik československé federace. Navazuje také na více než tisícileté dějiny české státnosti a kultury. Podle své ústavy je Česko parlamentní, demokratický právní stát s liberálním státním režimem a politickým systémem založeným na svobodné soutěži politických stran a hnutí. Hlavou státu je prezident republiky, vrcholným a jediným zákonodárným orgánem je dvoukomorový Parlament České republiky, na vrcholu moci výkonné stojí vláda České republiky.") # for testing purpose, the string with accented characters needs to have utf8 encoding (declaring strings like in this example returns encoding as “unknown”)
+sample_text <- enc2utf8("Česko, úředním názvem Česká republika, je stát ve střední Evropě. Samostatnost nabylo 1. ledna 1993 jako nástupnický stát Československa, předtím existovalo jako jedna ze dvou republik československé federace. Navazuje také na více než tisícileté dějiny české státnosti a kultury. Podle své ústavy je Česko parlamentní, demokratický právní stát s liberálním státním režimem a politickým systémem založeným na svobodné soutěži politických stran a hnutí. Hlavou státu je prezident republiky, vrcholným a jediným zákonodárným orgánem je dvoukomorový Parlament České republiky, na vrcholu moci výkonné stojí vláda České republiky.") # For testing purpose, the string with accented characters needs to have utf8 encoding (declaring strings like in this example returns encoding as “unknown”). If working with textual data stored in common tabular formats (e.g. .csv or .xlsx), I recommend packages that are part of tidy universe (*tidyverse*) which handle encoding of textual data with accented characters well (e.g. *readr*; *readxl*). 
 get_sentences(text = sample_text, language = "czech", lem = TRUE)
 
   doc_id paragraph_id sentence_id sentence                           sentence_lem                        
