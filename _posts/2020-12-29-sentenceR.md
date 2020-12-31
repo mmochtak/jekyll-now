@@ -39,7 +39,7 @@ get_sentences(text = sample_text, language = "english", lem = TRUE)
 6      2            1           3   This is sentence number six.   this be sentence number six.
 ~~~
 
-`sent_ngrams()` is a simple function that takes the result of `get_sentences()` (a data frame of class *sentenceR_df*) and creates higher sentence n-grams based on a specified *n*.
+`sent_ngrams()` is a simple function that takes the result of `get_sentences()` (a data frame of class `sentenceR_df`) and creates higher sentence n-grams based on a specified *n*.
 
 ~~~
 library(sentenceR)
@@ -54,7 +54,7 @@ sent_ngrams(sentences = result, n = 2)
 4      2        2  This is sentence number five. This is sentence number six.
 ~~~
 
-`sent_ngrams_lem()` is an equivalent to `sent_ngrams()` but instead of regular sentences their lemmatized version are taken as an input (column sentence_lem must exist in a data frame of class *sentenceR_df*).
+`sent_ngrams_lem()` is an equivalent to `sent_ngrams()` but instead of regular sentences their lemmatized version are taken as an input (column sentence_lem must exist in a data frame of class `sentenceR_df`).
 
 ~~~
 library(sentenceR)
