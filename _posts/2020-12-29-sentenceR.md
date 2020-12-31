@@ -21,7 +21,7 @@ The package can be simply installed from GitHub using *devtools*. All missing de
 devtools::install_github('mmochtak/sentenceR')
 ~~~
 
-The package contains three general functions: `get_sentences`{:.ruby}; *sent_ngrams*;  and *sent_ngrams_lem*. 
+The package contains three general functions: `get_sentences`; *sent_ngrams*;  and *sent_ngrams_lem*. 
 
 **get_sentences** is a general function for extraction sentences from raw text. The main input is a string vector. The only other required argument is the language model (here, for simplicity and clarity for broader audience, “english”; full list of available models can be found in [UDPipe repository]( https://github.com/bnosac/udpipe)). Additionally, if needed the output can be further cleaned off of numbers (add argument remove_no = TRUE) and punctuation (add argument remove_punct = TRUE), all characters can be transformed to lower cases (add argument tolower = TRUE), as well as the outcome sentence can be accompanied by its lemmatized version (add argument lem = TRUE; see example below). By default, all available cores are used for the processing.
 
