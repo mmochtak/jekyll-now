@@ -141,6 +141,6 @@ result %>%
 ~~~
 
 ## Final Remarks
-The package is still under development (current version is 0.0.1) so feel free to report any bugs or weird behavior. Feel free to contact me if standard GitHub channels are not suitable for you via my [personal website](https://mochtak.com). If used in your research, please cite it as:
+The package is still under development (current version is 0.0.1) so feel free to report any bugs or weird behavior. Also, feel free to contact me if standard GitHub channels are not suitable for you via my [personal website](https://mochtak.com). If used in your research, please cite it as:
 
 > Mochtak, Michal (2021): sentenceR: Language-Agnostic Sentence Tokenization for Low-Resourced Languages. URL: https://github.com/mmochtak/sentenceR/
