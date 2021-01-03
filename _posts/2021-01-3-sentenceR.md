@@ -34,7 +34,8 @@ The package contains three general functions: `get_sentences()`; `sent_ngrams()`
 library(sentenceR)
 
 sample_text <- c("This is sentence number one. This is sentence number two. This is sentence number three.", "This is sentence number four. This is sentence number five. This is sentence number six.")
-get_sentences(text = sample_text, language = "english", lem = TRUE)
+
+get_sentences(text = sample_text, language = "english", lem = TRUE, verbose = TRUE)
 
   doc_id paragraph_id sentence_id                       sentence                   sentence_lem
 1      1            1           1   This is sentence number one.   this be sentence number one.
@@ -51,7 +52,8 @@ get_sentences(text = sample_text, language = "english", lem = TRUE)
 library(sentenceR)
 
 sample_text <- c("This is sentence number one. This is sentence number two. This is sentence number three.", "This is sentence number four. This is sentence number five. This is sentence number six.")
-result <- get_sentences(text = sample_text, language = "english", lem = TRUE)
+
+result <- get_sentences(text = sample_text, language = "english", lem = TRUE, verbose = TRUE)
 sent_ngrams(sentences = result, n = 2)
 
   doc_id ngram_id                                                       ngram
@@ -67,7 +69,8 @@ sent_ngrams(sentences = result, n = 2)
 library(sentenceR)
 
 sample_text <- c("This is sentence number one. This is sentence number two. This is sentence number three.", "This is sentence number four. This is sentence number five. This is sentence number six.")
-result <- get_sentences(text = sample_text, language = "english", lem = TRUE)
+
+result <- get_sentences(text = sample_text, language = "english", lem = TRUE, verbose = TRUE)
 sent_ngrams_lem(sentences = result, n = 2)
 
   doc_id ngram_id                                                       ngram
@@ -88,7 +91,7 @@ sample_text <- enc2utf8("Česko, úředním názvem Česká republika, je stát 
 
 # NOTE: For this testing example, the string with accented characters needs to have utf-8 encoding (declaring strings like in the example above returns encoding as “unknown”). If working with textual data stored in common tabular formats (e.g. .csv or .xlsx), I recommend using packages that are part of tidy universe (tidyverse) which handle encoding of textual data with accented characters well (e.g. readr; readxl). 
 
-get_sentences(text = sample_text, language = "czech", lem = TRUE)
+get_sentences(text = sample_text, language = "czech", lem = TRUE, verbose = TRUE)
 
   doc_id paragraph_id sentence_id sentence                           sentence_lem                        
 1 1                 1           1 Česko, úředním názvem Česká repub~ český, úřední název český republika~
@@ -97,7 +100,7 @@ get_sentences(text = sample_text, language = "czech", lem = TRUE)
 4 1                 1           4 Podle své ústavy je Česko parlame~ podle svůj ústav být Česko parlamen~
 5 1                 1           5 Hlavou státu je prezident republi~ hlava stát být prezident republik, ~
 
-result <- get_sentences(text = sample_text, language = "czech", lem = TRUE)
+result <- get_sentences(text = sample_text, language = "czech", lem = TRUE, verbose = TRUE)
 sent_ngrams(sentences = result, n = 2)
 
   doc_id ngram_id ngram                                                                                  
@@ -125,7 +128,7 @@ Sys.setlocale(locale = "Czech_Czechia.1250")
 sample_text <- enc2utf8(c("Česko, úředním názvem Česká republika, je stát ve střední Evropě. Samostatnost nabylo 1. ledna 1993 jako nástupnický stát Československa, předtím existovalo jako jedna ze dvou republik československé federace. Navazuje také na více než tisícileté dějiny české státnosti a kultury.", 
 "Podle své ústavy je Česko parlamentní, demokratický právní stát s liberálním státním režimem a politickým systémem založeným na svobodné soutěži politických stran a hnutí. Hlavou státu je prezident republiky, vrcholným a jediným zákonodárným orgánem je dvoukomorový Parlament České republiky, na vrcholu moci výkonné stojí vláda České republiky.")) 
 
-result <- get_sentences(text = sample_text, language = "czech", lem = TRUE)
+result <- get_sentences(text = sample_text, language = "czech", lem = TRUE, verbose = TRUE)
 
 result %>%
      group_by(doc_id) %>%
