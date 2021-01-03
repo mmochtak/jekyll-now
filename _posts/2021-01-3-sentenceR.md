@@ -8,11 +8,16 @@ title: 'SentenceR: (Almost) Language-Agnostic Sentence Tokenization Using R'
 **sentenceR** is a language-agnostic utility designed for sentence tokenization of raw text. Using the UDPipe POS tagging pipeline, the package automatically extracts sentences with their appropriate indexes (hence the “crowbar” logo as a reference to extraction). The package works with any of the 100+ language models natively provided by UDPipe package.
 
 ## Overview
-Working on languages other than English is for many programmers interested in NLP a real obstacle requiring investing a lot of precious time in developing language-specific pre-processing tools. This process of “reinventing wheel” is necessary especially when it comes to applications that need to be fast, efficient, and accurate. For many projects, however, this initial investment of time and resources does not make sense, especially if it comes to testing and development. SentenceR is a package that focuses on streamlining at least part of this hassle when it comes to sentence tokenization and lemmatization. The motivation for putting together this package has come from my own experience while working on text processing of textual data from low-resourced languages. Although resources available for R users working on textual data have become very popular in the recent years, their primary focus still remains on English with other languages being far behind in terms of development and implementation.   
+Working on languages other than English is for many social scientists interested in NLP a real obstacle requiring investing a lot of precious time in developing language-specific pre-processing tools. This process of “reinventing wheel” is necessary especially when it comes to applications that need to be fast, efficient, and accurate. For many projects, however, this initial investment of time and resources does not make sense, especially if it comes to testing and development. SentenceR is a package that focuses on streamlining at least part of this hassle when it comes to sentence tokenization and lemmatization. The motivation for putting together this package has come from my own experience while working on text processing of textual data from low-resourced languages. Although resources available for R users working on textual data have become very popular in the recent years, their primary focus still remains on English with other languages being far behind in terms of development and implementation.   
 
 The package is intended for use especially with non-English languages that are under-resourced in terms of standardized tools. The approach is not particularly fast as the pipeline relies on full POS tagging done by UDPipe package but it provides a reliable option for users working on small corpora of various origins (typically social scientists) who need a simple pre-processing tool for extracting sentence-level tokens and their higher n-grams. For the convenience, the main function provides several control arguments for cleaning the raw text as well as extracting its lemmatized form for further processing.
 
-The package has been developed as a practice for me as I wanted to learn how to create packages to better organize my code. However, it might be useful to anybody working on NLP tasks requiring sentence tokenization and lemmatization in languages other than English without the complexity found in other, more advanced solutions. As I already mentioned, the approach is not the most efficient in terms of speed and accuracy but it is very versatile when it comes to languages that can be processed out of the box. Regarding accuracy, it is important to stress that sentence tokenization is based on accuracy of language models and may differ among models. Although I’ve never planned to submit it to CRAN, I am planning to maintain it as long as it is still useful via [GitHub]( https://github.com/mmochtak/sentenceR).
+The package has been developed as a practice for me as I wanted to learn how to create packages to better organize my code. However, it might be useful to anybody working on NLP tasks requiring sentence tokenization and lemmatization in languages other than English without the complexity found in other, more advanced solutions. As I already mentioned, the approach is not the most efficient in terms of speed but it is very versatile when it comes to a list of languages that can be processed out of the box. Regarding accuracy, it is important to stress that sentence tokenization is based on accuracy of language models which are provided by UDPipe. Although I’ve never planned to submit it to CRAN, I am planning to maintain it as long as it is still useful via [GitHub]( https://github.com/mmochtak/sentenceR).
+
+## Main tasks the package is intended for
+- easy sentence tokenization of textual data for (primarily) low-resourced languages
+- lemmatization of sentences
+- easy construction of higher sentence n-grams
 
 ## Installation Instructions and Usage
 The package can be simply installed from GitHub using *devtools*. All missing dependencies will be installed together with it.
@@ -27,6 +32,7 @@ The package contains three general functions: `get_sentences()`; `sent_ngrams()`
 
 ~~~
 library(sentenceR)
+
 sample_text <- c("This is sentence number one. This is sentence number two. This is sentence number three.", "This is sentence number four. This is sentence number five. This is sentence number six.")
 get_sentences(text = sample_text, language = "english", lem = TRUE)
 
@@ -43,6 +49,7 @@ get_sentences(text = sample_text, language = "english", lem = TRUE)
 
 ~~~
 library(sentenceR)
+
 sample_text <- c("This is sentence number one. This is sentence number two. This is sentence number three.", "This is sentence number four. This is sentence number five. This is sentence number six.")
 result <- get_sentences(text = sample_text, language = "english", lem = TRUE)
 sent_ngrams(sentences = result, n = 2)
@@ -54,10 +61,11 @@ sent_ngrams(sentences = result, n = 2)
 4      2        2  This is sentence number five. This is sentence number six.
 ~~~
 
-`sent_ngrams_lem()` is an equivalent to `sent_ngrams()` but instead of regular sentences their lemmatized version are taken as an input (column *sentence_lem* must exist in a data frame of class `sentenceR_df`).
+`sent_ngrams_lem()` is an equivalent to `sent_ngrams()` but instead of regular sentences their lemmatized versions are taken as an input (column *sentence_lem* must exist in a data frame of class `sentenceR_df`).
 
 ~~~
 library(sentenceR)
+
 sample_text <- c("This is sentence number one. This is sentence number two. This is sentence number three.", "This is sentence number four. This is sentence number five. This is sentence number six.")
 result <- get_sentences(text = sample_text, language = "english", lem = TRUE)
 sent_ngrams_lem(sentences = result, n = 2)
@@ -74,13 +82,16 @@ Previous section has demonstrated the application of package on data that are ge
 
 ~~~
 library(sentenceR)
+
 Sys.setlocale(locale = "Czech_Czechia.1250") # Do not forget to set proper locale to avoid any problems with encoding (here is Czech_Czechia.1250 for Czech language)
-sample_text <- enc2utf8("Česko, úředním názvem Česká republika, je stát ve střední Evropě. Samostatnost nabylo 1. ledna 1993 jako nástupnický stát Československa, předtím existovalo jako jedna ze dvou republik československé federace. Navazuje také na více než tisícileté dějiny české státnosti a kultury. Podle své ústavy je Česko parlamentní, demokratický právní stát s liberálním státním režimem a politickým systémem založeným na svobodné soutěži politických stran a hnutí. Hlavou státu je prezident republiky, vrcholným a jediným zákonodárným orgánem je dvoukomorový Parlament České republiky, na vrcholu moci výkonné stojí vláda České republiky.") # For testing purpose, the string with accented characters needs to have utf8 encoding (declaring strings like in this example returns encoding as “unknown”). If working with textual data stored in common tabular formats (e.g. .csv or .xlsx), I recommend using packages that are part of tidy universe (tidyverse) which handle encoding of textual data with accented characters well (e.g. readr; readxl). 
+sample_text <- enc2utf8("Česko, úředním názvem Česká republika, je stát ve střední Evropě. Samostatnost nabylo 1. ledna 1993 jako nástupnický stát Československa, předtím existovalo jako jedna ze dvou republik československé federace. Navazuje také na více než tisícileté dějiny české státnosti a kultury. Podle své ústavy je Česko parlamentní, demokratický právní stát s liberálním státním režimem a politickým systémem založeným na svobodné soutěži politických stran a hnutí. Hlavou státu je prezident republiky, vrcholným a jediným zákonodárným orgánem je dvoukomorový Parlament České republiky, na vrcholu moci výkonné stojí vláda České republiky.") 
+
+# NOTE: For this testing example, the string with accented characters needs to have utf-8 encoding (declaring strings like in the example above returns encoding as “unknown”). If working with textual data stored in common tabular formats (e.g. .csv or .xlsx), I recommend using packages that are part of tidy universe (tidyverse) which handle encoding of textual data with accented characters well (e.g. readr; readxl). 
 
 get_sentences(text = sample_text, language = "czech", lem = TRUE)
 
   doc_id paragraph_id sentence_id sentence                           sentence_lem                        
-1 1                 1           1 Česko, úředním názvem Česká repub~ česko, úřední název český republika~
+1 1                 1           1 Česko, úředním názvem Česká repub~ český, úřední název český republika~
 2 1                 1           2 Samostatnost nabylo 1. ledna 1993~ samostatnost nabýt 1. leden 1993 ja~
 3 1                 1           3 Navazuje také na více než tisícil~ navazovat také na hodně než tisícil~
 4 1                 1           4 Podle své ústavy je Česko parlame~ podle svůj ústav být Česko parlamen~
@@ -98,10 +109,32 @@ sent_ngrams(sentences = result, n = 2)
 sent_ngrams_lem(sentences = result, n = 2)
 
   doc_id ngram_id ngram                                                                                  
-1 1      1        česko, úřední název český republika, být stát v střední Evropa. samostatnost nabýt 1. ~
+1 1      1        český, úřední název český republika, být stát v střední Evropa. samostatnost nabýt 1. ~
 2 1      2        samostatnost nabýt 1. leden 1993 jako nástupnický stát Československo, předtím existov~
 3 1      3        navazovat také na hodně než tisíciletý dějiny český státnost a kultura. podle svůj úst~
 4 1      4        podle svůj ústav být Česko parlamentní, demokratický právní stát s liberální státní re~
+~~~
+
+Any of the presented outputs can be further wrangled and used for processing with popular text mining packages like `tm` or `quanteda`. Here is a simple example that takes the parsed sentences (both raw and lemmatized versions) and returns them as original documents.
+
+~~~
+library(sentenceR)
+library(dplyr)
+
+Sys.setlocale(locale = "Czech_Czechia.1250")
+sample_text <- enc2utf8(c("Česko, úředním názvem Česká republika, je stát ve střední Evropě. Samostatnost nabylo 1. ledna 1993 jako nástupnický stát Československa, předtím existovalo jako jedna ze dvou republik československé federace. Navazuje také na více než tisícileté dějiny české státnosti a kultury.", 
+"Podle své ústavy je Česko parlamentní, demokratický právní stát s liberálním státním režimem a politickým systémem založeným na svobodné soutěži politických stran a hnutí. Hlavou státu je prezident republiky, vrcholným a jediným zákonodárným orgánem je dvoukomorový Parlament České republiky, na vrcholu moci výkonné stojí vláda České republiky.")) 
+
+result <- get_sentences(text = sample_text, language = "czech", lem = TRUE)
+
+result %>%
+     group_by(doc_id) %>%
+     summarise(text_full = paste(sentence, collapse = " "),
+               text_full_lem = paste(sentence_lem, collapse = " "))
+
+  doc_id text_full                         text_full_lem                     
+1      1 Česko, úředním názvem Česká repu~ český, úřední název český republi~
+2      2 Podle své ústavy je Česko parlam~ podle svůj ústav být Česko parlam~
 ~~~
 
 ## Final Remarks
